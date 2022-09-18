@@ -1,1 +1,1 @@
-# Triton-static-build-windows-
+# Triton-static-build-windows
