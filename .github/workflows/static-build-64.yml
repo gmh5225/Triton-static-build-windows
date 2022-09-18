@@ -8,14 +8,21 @@ jobs:
     env:
       BUILD_TYPE: Release
     steps:
-    - name: Checkout Repo
+    - name: Checkout Triton
       uses: actions/checkout@v3
       with:
         repository: gmh5225/Triton
+        path: Triton
   
+    - name: Checkout 3rdparty
+      uses: actions/checkout@v3
+      with:
+        repository: gmh5225/Triton-static-3rdparty
+        path: Triton/Triton-static-3rdparty    
+        
     - name: Build
       run: |
-        cmake -B build64 -DCMAKE_BUILD_TYPE=Release -DMSVC_STATIC=on -DBOOST_INTERFACE=off -DPYTHON_BINDINGS=off -DZ3_INCLUDE_DIRS="3rdparty/libz3/include" -DZ3_LIBRARIES="3rdparty/libz3/X64/libz3.lib" -DCAPSTONE_INCLUDE_DIRS="3rdparty/capstone/include" -DCAPSTONE_LIBRARIES="3rdparty/capstone/X64/capstone.lib" -DBUILD_SHARED_LIBS=off
+        cmake -B build64 -DCMAKE_BUILD_TYPE=Release -DMSVC_STATIC=on -DBOOST_INTERFACE=off -DPYTHON_BINDINGS=off -DZ3_INCLUDE_DIRS="Triton-static-3rdparty/libz3/include" -DZ3_LIBRARIES="Triton-static-3rdparty/libz3/X64/libz3.lib" -DCAPSTONE_INCLUDE_DIRS="Triton-static-3rdparty/capstone/include" -DCAPSTONE_LIBRARIES="Triton-static-3rdparty/capstone/X64/capstone.lib" -DBUILD_SHARED_LIBS=off Triton
         cmake --build build64 --config Release --parallel
         
     - name: Copy SDK
