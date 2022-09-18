@@ -28,10 +28,10 @@ jobs:
     - name: Copy SDK
       run: |
         mkdir build64\include\triton
-        copy Triton\src\libtriton\includes\triton\*.* build64\include\triton
-        copy Triton\build64\src\libtriton\includes\triton\*.* build64\include\triton
+        copy src\libtriton\includes\triton\*.* build64\include\triton
+        copy build64\src\libtriton\includes\triton\*.* build64\include\triton
         mkdir build64\lib
-        copy Triton\build64\src\libtriton\Release\*.* build64\lib
+        copy build64\src\libtriton\Release\*.* build64\lib
         
     - name: Upload artifacts
       uses: actions/upload-artifact@main
